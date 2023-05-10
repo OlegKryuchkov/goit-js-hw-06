@@ -13,29 +13,17 @@ const images = [
   },
 ];
 
-const imagesListRef = document.querySelector(".gallery");
+const galeryEl = document.querySelector(".gallery");
 
-// Мінімальне оформлення списку
-imagesListRef.style.display = "flex";
-imagesListRef.style.justifyContent = "center";
-
-const makeImagesListItem = ({ url, alt }) => {
-  const imageListItemRef = document.createElement("li");
-  imageListItemRef.insertAdjacentHTML(
-    "afterbegin",
-    `<img src=${url} alt=${alt}>`
-  );
-  // Мінімальне оформлення елементів списку
-  imageListItemRef.style.display = "flex";
-  imageListItemRef.style.justifyContent = "center";
-  imageListItemRef.style.width = "200px";
-  imageListItemRef.style.height = "200px";
-  imageListItemRef.style.margin = "5px";
-  imageListItemRef.style.overflow = "hidden";
-  // Повертаємо результат з потрібною розміткою на місце виклику
-  return imageListItemRef;
+const createImgElement = ({ url, alt }) => {
+  return `<li class = "gallery-item"><img src = ${url} alt='${alt}'
+  width = "640"></li>`;
 };
-// для всіх заданих об'єктів викличемо функцію
-const markupImagesInsert = images.map(makeImagesListItem);
-// Додаємо розмітку в список
-imagesListRef.append(...markupImagesInsert);
+
+const imagesEl = images.map((image) => createImgElement(image)).join("");
+
+galeryEl.style.listStyleType = "none";
+
+galeryEl.insertAdjacentHTML("afterbegin", imagesEl);
+
+console.log(galeryEl);

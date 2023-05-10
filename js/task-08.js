@@ -1,25 +1,22 @@
 const form = document.querySelector(".login-form");
 
-form.addEventListener("submit", handleSubmit);
-function handleSubmit(event) {
-  //   Скасовуємо перезавантаження сторінки за замовчуванням
+form.addEventListener("submit", onFormSubmit);
+
+function onFormSubmit(event) {
   event.preventDefault();
-  const {
-    elements: { email, password },
-  } = event.currentTarget;
 
-  const email = form.elements.email.value;
-  const password = form.elements.password.value;
+  // const email = form.elements.email.value;
+  // const password = form.elements.password.value;
+  const { email, password } = form.elements;
 
-  if (!email || !password) {
-    alert(
-      "Попередження: Поля мають бути заповнені. Email or password must be filled"
-    );
-    return;
+  if (email.value === "" || password.value.trim() === "") {
+    return alert("Всі поля повинні бути заповнені!");
   }
+  const formData = {
+    email: email,
+    password: password,
+  };
+  console.dir(formData);
 
-  const formDataObject = { email, password };
-
-  console.log(formDataObject);
   form.reset();
 }
