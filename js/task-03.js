@@ -15,15 +15,15 @@ const images = [
 
 const galeryEl = document.querySelector(".gallery");
 
-const createImgElement = ({ url, alt }) => {
-  return `<li class = "gallery-item"><img src = ${url} alt='${alt}'
-  width = "640"></li>`;
-};
-
-const imagesEl = images.map((image) => createImgElement(image)).join("");
+const createImgElement = images
+  .map(
+    ({ url, alt }) =>
+      `<li class="gallery-item"><img class="gallery-item-img" src=${url} alt=${alt} width = "640"></li>`
+  )
+  .join("");
 
 galeryEl.style.listStyleType = "none";
 
-galeryEl.insertAdjacentHTML("afterbegin", imagesEl);
+galeryEl.insertAdjacentHTML("afterbegin", createImgElement);
 
 console.log(galeryEl);
